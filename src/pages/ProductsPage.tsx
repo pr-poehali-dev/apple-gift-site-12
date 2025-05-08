@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { useCart } from "@/context/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 interface GiftCard {
   id: string;
@@ -19,6 +21,8 @@ interface GiftCard {
 }
 
 const ProductsPage = () => {
+  const { addItem } = useCart();
+
   const giftCards: GiftCard[] = [
     {
       id: "gc-1000",
@@ -48,6 +52,19 @@ const ProductsPage = () => {
         "Премиальная карта для значительных покупок, идеальна для любителей Apple",
     },
   ];
+
+  const handleAddToCart = (card: GiftCard) => {
+    addItem({
+      id: card.id,
+      title: `${card.title} - ${card.price} ₽`,
+      price: card.price,
+    });
+
+    toast({
+      title: "Товар добавлен в корзину",
+      description: `${card.title} - ${card.price} ₽`,
+    });
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -89,12 +106,9 @@ const ProductsPage = () => {
                   <p className="text-gray-600">{card.description}</p>
                 </CardContent>
                 <CardFooter>
-                  {/* Изменяем обработчик добавления в корзину в ProductsPage */}
                   <Button
                     className="w-full bg-[#0071E3] hover:bg-[#0071E3]/90"
-                    onClick={() =>
-                      alert(`Добавлен ${card.title} за ${card.price} ₽`)
-                    }
+                    onClick={() => handleAddToCart(card)}
                   >
                     <Icon name="ShoppingCart" className="mr-2 h-4 w-4" />
                     Добавить в корзину

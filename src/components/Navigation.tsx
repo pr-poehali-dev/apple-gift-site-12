@@ -4,22 +4,14 @@ import Icon from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 import ShoppingCart from "./ShoppingCart";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartContext";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const location = useLocation();
-
-  // Демо-данные для корзины (в реальном приложении это будет в Context или Redux)
-  const [cartItems, setCartItems] = useState([
-    {
-      id: "gc-1000",
-      title: "Apple Gift Card - 1000 ₽",
-      price: 1000,
-      quantity: 1,
-    },
-  ]);
+  const { totalItems } = useCart();
 
   // Track scroll position for transparent->solid header transition
   useEffect(() => {
@@ -42,22 +34,8 @@ const Navigation = () => {
     { title: "Инструкция", path: "/instruction" },
   ];
 
-  // Функции для работы с корзиной
-  const removeItem = (id: string) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
-  const updateQuantity = (id: string, quantity: number) => {
-    setCartItems(
-      cartItems.map((item) => (item.id === id ? { ...item, quantity } : item)),
-    );
-  };
-
   // Определяем, находимся ли мы на главной странице
   const isHomePage = location.pathname === "/";
-
-  // Общее количество товаров в корзине
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <>
@@ -168,13 +146,7 @@ const Navigation = () => {
       </header>
 
       {/* Shopping Cart Sidebar */}
-      <ShoppingCart
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        items={cartItems}
-        onRemoveItem={removeItem}
-        onUpdateQuantity={updateQuantity}
-      />
+      <ShoppingCart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );
 };

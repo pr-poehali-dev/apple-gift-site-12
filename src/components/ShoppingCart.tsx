@@ -12,31 +12,28 @@ import {
 import Icon from "@/components/ui/icon";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  quantity: number;
-}
+import { useCart } from "@/context/CartContext";
+import { toast } from "@/hooks/use-toast";
 
 interface ShoppingCartProps {
   isOpen: boolean;
   onClose: () => void;
-  items?: CartItem[];
-  onRemoveItem?: (id: string) => void;
-  onUpdateQuantity?: (id: string, quantity: number) => void;
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({
   isOpen,
   onClose,
-  items = [],
-  onRemoveItem,
-  onUpdateQuantity,
 }) => {
-  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
-  const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const { items, removeItem, updateQuantity, totalItems, totalPrice, clearCart } = useCart();
+
+  const handleCheckout = () => {
+    toast({
+      title: "Заказ оформлен",
+      description: `Сумма заказа: ${totalPrice.toLocaleString()} ₽`,
+    });
+    clearCart();
+    onClose();
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
@@ -77,7 +74,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
                         variant="ghost"
                         size="sm"
                         className="h-8 px-2"
-                        onClick={() => onUpdateQuantity?.(item.id, Math.max(1, item.quantity - 1))}
+                        onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
                         disabled={item.quantity <= 1}
                       >
                         <Icon name="Minus" size={16} />
@@ -88,7 +85,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
                         variant="ghost"
                         size="sm"
                         className="h-8 px-2"
-                        onClick={() => onUpdateQuantity?.(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       >
                         <Icon name="Plus" size={16} />
                       </Button>
@@ -98,7 +95,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
                       variant="ghost"
                       size="sm"
                       className="h-8 px-2 text-red-500 hover:text-red-700 hover:bg-red-50"
-                      onClick={() => onRemoveItem?.(item.id)}
+                      onClick={() => removeItem(item.id)}
                     >
                       <Icon name="Trash2" size={16} />
                     </Button>
@@ -116,7 +113,10 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
               </div>
 
               <SheetFooter className="flex-col gap-2 sm:flex-col">
-                <Button className="w-full bg-[#0071E3] hover:bg-[#0071E3]/90">
+                <Button 
+                  className="w-full bg-[#0071E3] hover:bg-[#0071E3]/90"
+                  onClick={handleCheckout}
+                >
                   Оформить заказ
                 </Button>
                 <SheetClose asChild>
