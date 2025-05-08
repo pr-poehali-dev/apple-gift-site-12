@@ -9,8 +9,8 @@ const HomePage = () => {
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Темный фон для hero-секции */}
-        <div className="absolute inset-0 bg-[#1a1a1a]"></div>
+        {/* Черный фон для hero-секции */}
+        <div className="absolute inset-0 bg-black"></div>
         
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
