@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,7 @@ const HomePage = () => {
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         {/* Черный фон для hero-секции */}
         <div className="absolute inset-0 bg-black"></div>
-        
+
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Apple Gift Cards
@@ -28,8 +27,7 @@ const HomePage = () => {
             </Button>
             <Button
               asChild
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 font-medium text-base px-8 py-6 h-auto"
+              className="bg-[#0071E3] text-white hover:bg-[#0071E3]/90 font-medium text-base px-8 py-6 h-auto"
             >
               <Link to="/instruction">Как использовать</Link>
             </Button>

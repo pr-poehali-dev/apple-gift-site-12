@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "@/components/ui/icon";
@@ -32,14 +31,12 @@ const Navigation = () => {
 
   // Определяем, находимся ли мы на главной странице
   const isHomePage = location.pathname === "/";
-  
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isHomePage && !isScrolled && !mobileMenuOpen 
-          ? "bg-transparent" 
-          : "bg-white/95 backdrop-blur-md shadow-sm"
+        isHomePage ? "bg-black" : "bg-white shadow-sm",
       )}
     >
       <div className="container mx-auto px-4">
@@ -52,8 +49,8 @@ const Navigation = () => {
           >
             <div
               className={cn(
-                "flex items-center gap-2 transition-colors duration-300",
-                isHomePage && !isScrolled && !mobileMenuOpen ? "text-white" : "text-black"
+                "flex items-center gap-2",
+                isHomePage ? "text-white" : "text-black",
               )}
             >
               <Icon name="Apple" />
@@ -68,11 +65,11 @@ const Navigation = () => {
                 key={route.path}
                 to={route.path}
                 className={cn(
-                  "transition-colors duration-300 hover:opacity-80",
+                  "transition-colors hover:opacity-80",
                   location.pathname === route.path
                     ? "font-medium"
                     : "font-normal",
-                  isHomePage && !isScrolled && !mobileMenuOpen ? "text-white" : "text-black"
+                  isHomePage ? "text-white" : "text-black",
                 )}
               >
                 {route.title}
@@ -84,8 +81,8 @@ const Navigation = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={cn(
-              "md:hidden transition-colors duration-300",
-              isHomePage && !isScrolled && !mobileMenuOpen ? "text-white" : "text-black"
+              "md:hidden",
+              isHomePage ? "text-white" : "text-black",
             )}
             aria-label="Toggle menu"
           >
