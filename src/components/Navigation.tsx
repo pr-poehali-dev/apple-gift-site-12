@@ -36,7 +36,7 @@ const Navigation = () => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isHomePage ? "bg-black" : "bg-white shadow-sm",
+        isHomePage ? "bg-gradient-animation text-white" : "bg-white shadow-sm",
       )}
     >
       <div className="container mx-auto px-4">
