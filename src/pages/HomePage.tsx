@@ -29,13 +29,13 @@ const HomePage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
-              className="bg-white text-black hover:bg-white/90 font-medium text-base px-8 py-6 h-auto"
+              className="bg-white text-black hover:bg-white/90 font-medium text-base px-8 py-6 h-auto rounded-full"
             >
               <Link to="/products">Выбрать карту</Link>
             </Button>
             <Button
               asChild
-              className="bg-[#0071E3] text-white hover:bg-[#0071E3]/90 font-medium text-base px-8 py-6 h-auto"
+              className="bg-[#0071E3] text-white hover:bg-[#0071E3]/90 font-medium text-base px-8 py-6 h-auto rounded-full"
             >
               <Link to="/instruction">Как использовать</Link>
             </Button>
