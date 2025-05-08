@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,9 @@ const HomePage = () => {
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#000000] to-[#333333] opacity-90"></div>
+        {/* Темный фон для hero-секции */}
+        <div className="absolute inset-0 bg-[#1a1a1a]"></div>
+        
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Apple Gift Cards
