@@ -8,8 +8,16 @@ const HomePage = () => {
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Черный фон для hero-секции */}
-        <div className="absolute inset-0 bg-black"></div>
+        {/* Фоновое изображение */}
+        <div className="absolute inset-0">
+          <img
+            src="https://i.redd.it/32h4nufe0gke1.jpeg"
+            alt="Apple Gift Cards"
+            className="w-full h-full object-cover"
+          />
+          {/* Затемняющий оверлей для лучшей читаемости текста */}
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
 
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
